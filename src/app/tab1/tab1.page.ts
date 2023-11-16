@@ -15,10 +15,10 @@ export class Tab1Page {
   constructor(private formBuilder: FormBuilder, private _service : FirebaseService, private toastController: ToastController) {
   }
 
-  profileForm = this.formBuilder.nonNullable.group({
-    name : ['', Validators.required],
+  profileForm = this.formBuilder.group({
+    name : ['' ],
     email : ['', Validators.required],
-    gender : ['', Validators.required]
+    gender : ['' ]
   })
 
   onSubmit(){

@@ -1,3 +1,5 @@
+<div class="ion-page">
+
 <ion-header>
   <ion-toolbar>
   <ion-buttons>
@@ -8,14 +10,55 @@
     <ion-title slot="end">details</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding">
 @if(user){
+  @if(user.name){
   <h1>{{user.name}}</h1>
+  } @else {
+    <i>Username not specified</i>
+  }
   <p>{{user.email}}</p>
+   @if(user.gender){
+  <h1>{{user.gender}}</h1>
+  } @else {
+    <i>gender not specified</i>
+  }
   <p>{{user.gender}}</p>
+  <ion-button expand="block" id="open-modal" >Edit</ion-button>
+  <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Edit {{user.email}}</ion-title>
+            <ion-buttons  slot="end">
+              <ion-button color="success"  (click)="modal.dismiss()">exit</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <form [formGroup]="editUserForm" (ngSubmit)="onSubmitEditForm()" > 
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input formControlName="name" placeholder="{{user.name}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" placeholder="{{user.email}}"></ion-input>
+          </ion-item>
+            <ion-select formControlName="gender" interface="popover" placeholder="{{user.gender}}" >
+              <ion-select-option value="male">male</ion-select-option>
+              <ion-select-option value="female">female</ion-select-option>
+              <ion-select-option value="notSpecified">not specified</ion-select-option>
+            </ion-select>
+            <ion-button type="submit">SUBMIT</ion-button>
+          </form>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 } @else {
   <h1>User not found</h1>
 }
 
 
 </ion-content>
+</div>

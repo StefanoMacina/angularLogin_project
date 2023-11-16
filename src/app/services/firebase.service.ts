@@ -1,35 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user.interface';
-import { Observable, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseService {
-
-  constructor(private _http : HttpClient) { }
- 
-
+  constructor(private _http: HttpClient) {}
 
   //Metodo per inserimento dati nel db
-  addUser(url : string, body : any){
-    return this._http.post(url , body )
+  addUser(url: string, body: any) {
+    return this._http.post(url, body);
   }
 
-  getAllUsers(url : string){
-    return this._http.get(url)
+  getAllUsers(url: string) {
+    return this._http.get(url);
   }
 
-  getUserById(url : string, id : string){
-    return this._http.get(`${url}/${id}.json`)
+  getUserById(url: string, id: string) {
+    return this._http.get(`${url}/${id}.json`);
   }
 
   deleteUser(url: string, id: string) {
-    return this._http.delete(`${url}/${id}.json`)
-      
-    ;
+    return this._http.delete(`${url}/${id}.json`);
   }
 
-
+  editUser(url : string ,  id : string, body : {}){
+    return this._http.patch(`${url}/${id}.json`, body)
+  }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.interface';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -9,24 +11,67 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent {
-  user:any;
+  presentingElement : undefined | null | Element;
+  url =
+  'https://loginprova-ff37d-default-rtdb.europe-west1.firebasedatabase.app/users';
+  user: any;
+  userId! : string 
 
-  url = 'https://loginprova-ff37d-default-rtdb.europe-west1.firebasedatabase.app/users';
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _service: FirebaseService
-  ) {}
-
-  ionViewWillEnter() {
-   this._activatedRoute.params.subscribe((data) => {
-    this._service.getUserById(this.url, data['id']).subscribe((user) => this.user = user)
-    // console.log('user id from routes : ' + data['id'])
-    })
+    private _service: FirebaseService,
+    private actionSheetCtrl: ActionSheetController,
+    private formBuilder: FormBuilder
+  ) {
+     this._activatedRoute.params.subscribe((data) => this.userId = data['id'])
+  }
   
-
-    /* this._service.getUserById(this.url, userId).subscribe((user : any) => {
-      console.log(user)
-    }) */
+  ngOnInit(){
+    this.presentingElement = document.querySelector('.ion-page');
+    
   }
 
+  ionViewWillEnter() {
+
+      this._service
+        .getUserById(this.url, this.userId)
+        .subscribe((user) => (this.user = user));
+    };
+  
+
+  editUserForm = this.formBuilder.group({
+    name : [``],
+    email : ['', Validators.required],
+    gender : ['']
+  })
+
+  onSubmitEditForm(){
+    // console.log(this.editUserForm.value)
+    this._service.editUser(this.url, this.userId, 
+      this.editUserForm.value
+      ).subscribe(x => this.user = x)
+  }
+
+  canDismiss = async () => {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'confirm',
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    actionSheet.present();
+
+    const { role } = await actionSheet.onWillDismiss();
+
+    return role === 'confirm';
+  };
+  
 }

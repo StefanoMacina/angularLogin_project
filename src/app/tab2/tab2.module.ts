@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Tab2Page } from './tab2.page';
 
@@ -13,7 +13,8 @@ import { ListComponent } from '../components/list/list.component';
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [Tab2Page, DetailsComponent, ListComponent]
 })
