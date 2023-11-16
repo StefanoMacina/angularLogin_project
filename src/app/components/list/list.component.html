@@ -1,0 +1,35 @@
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  @if(users){
+  @for (user of users; track user.name) {
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item-options side="start">
+        <ion-item-option color="primary">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    <ion-item (click)="onSelect(user.id)">
+      <div class="flex flex-col" style="margin: 0 auto; text-align: center;">
+        <h3>{{user.name}}</h3>
+        <p>{{user.email}}</p>
+      </div>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)=onDelete(user.id) >
+        <ion-icon slot="icon-only" name="trash" ></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
+  }
+
+  } @else {
+    <h2>There are no users</h2>
+  }
+

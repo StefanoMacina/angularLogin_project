@@ -3,34 +3,6 @@
     <ion-title> Tab 2 </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="getAllUsersFunction($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  @for (user of users; track user.name) {
-  <ion-list>
-
-    <ion-item-sliding>
-      <ion-item-options side="start">
-        <ion-item-option color="primary">
-          <ion-icon slot="icon-only" name="create"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-
-    <ion-item >
-      <div class="flex flex-col" style="margin: 0 auto; text-align: center;">
-        <h3>{{user.name}}</h3>
-        <p>{{user.email}}</p>
-      </div>
-    </ion-item>
-
-    <ion-item-options side="end">
-      <ion-item-option color="danger" >
-        <ion-icon slot="icon-only" name="trash" ></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-  </ion-list>
-  }
+  <app-list [users] = "usersList"  (delete)="deleteUser($event)" (select)="showDetails($event)" (refresh)="getAllUsersFunction($event)" ></app-list>
 </ion-content>

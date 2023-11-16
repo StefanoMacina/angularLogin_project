@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-buttons>
+    <ion-back-button style="display : block" slot="start">
+      <ion-icon name="caret-back-outline"></ion-icon>
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title slot="end">details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+@if(user){
+  <h1>{{user.email}}</h1>
+} @else {
+  <h1>User not found</h1>
+}
+
+
+</ion-content>

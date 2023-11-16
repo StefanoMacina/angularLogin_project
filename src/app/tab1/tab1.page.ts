@@ -15,6 +15,8 @@ export class Tab1Page {
     
   }
 
+ 
+
   profileForm = this.formBuilder.nonNullable.group({
     name : ['', Validators.required],
     email : ['', Validators.required],
