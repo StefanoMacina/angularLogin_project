@@ -9,7 +9,7 @@ const routes: Routes = [
     component: Tab2Page,
   },
   {
-    path: 'details/:email',
+    path: 'details/:id',
     component: DetailsComponent ,
   }
 ];

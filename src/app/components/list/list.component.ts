@@ -9,12 +9,12 @@ import { User } from 'src/app/interfaces/user.interface';
 })
 export class ListComponent {
   @Input() users: User[] = [];
-  @Output() delete = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<User>();
   @Output() select = new EventEmitter<string>()
   @Output() refresh = new EventEmitter<CustomEvent<RefresherEventDetail>>()
 
-  onDelete(id: string) {
-    this.delete.emit(id);
+  onDelete(user: User) {
+    this.delete.emit(user);
   }
 
   onSelect(id : string){

@@ -21,7 +21,7 @@ export class FirebaseService {
     return this._http.get(url)
   }
 
-  getUserByEmail(url : string, id : string){
+  getUserById(url : string, id : string){
     return this._http.get(`${url}/${id}.json`)
   }
 

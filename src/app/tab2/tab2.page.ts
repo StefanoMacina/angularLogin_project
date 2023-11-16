@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../interfaces/user.interface';
 import { FirebaseService } from '../services/firebase.service';
-import { IonRefresher, RefresherEventDetail } from '@ionic/angular';
+import { IonRefresher, RefresherEventDetail, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -18,7 +18,9 @@ export class Tab2Page {
   constructor(
     private _service: FirebaseService,
     private router: Router,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private toastController: ToastController
+
   ) {}
 
   ngOnInit() {
@@ -73,14 +75,26 @@ export class Tab2Page {
   }
 
   // Ricevo dal child component list
-  deleteUser(id: string) {
+  deleteUser(user: User) {
     this._service
       .deleteUser(
         'https://loginprova-ff37d-default-rtdb.europe-west1.firebasedatabase.app/users',
-        id
+        user.id
       )
       .subscribe(() => {
+        this.presentToast('top' , user.email)
         this.getAllUsersFunction();
       });
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', userEmail : string) {
+    const toast = await this.toastController.create({
+      message: `User ${userEmail} successfully deleted`,
+      duration: 1500,
+      position: position,
+      color : 'success'
+    });
+
+    await toast.present();
   }
 }

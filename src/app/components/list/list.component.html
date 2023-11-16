@@ -3,7 +3,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)" >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  @if(users){
+
   @for (user of users; track user.name) {
   <ion-list>
     <ion-item-sliding>
@@ -21,15 +21,13 @@
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option color="danger" (click)=onDelete(user.id) >
+      <ion-item-option color="danger" (click)="onDelete(user)" >
         <ion-icon slot="icon-only" name="trash" ></ion-icon>
       </ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
   </ion-list>
-  }
-
-  } @else {
+  } @empty {
     <h2>There are no users</h2>
   }
 
