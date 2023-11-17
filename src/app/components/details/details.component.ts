@@ -23,7 +23,8 @@ export class DetailsComponent {
     private formBuilder: FormBuilder
     ) {
    
-     this._activatedRoute.params.subscribe((data) => this.userId = data['id'])
+    //  this._activatedRoute.params.subscribe((data) => this.userId = data['id'])
+    this.userId = this._activatedRoute.snapshot.params['id']
   }
   
   ngOnInit(){

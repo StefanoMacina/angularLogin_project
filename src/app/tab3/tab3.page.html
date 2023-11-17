@@ -1,8 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title> Tab 3 </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  
+  <ng-template *ngIf="user ; else ifNotUser">
+    <ion-button color="success" (click)="goToSignUp()">SIGNUP</ion-button>
+    <ion-button color="primary" (click)="goToLogin()">LOGIN</ion-button>
+  </ng-template>
 
+  <ng-template #ifNotUser>
+    <ion-button *ngIf="user" color="danger" (click)="logout()"
+      >LOGOUT</ion-button
+    >
+  </ng-template>
+</ion-content>
