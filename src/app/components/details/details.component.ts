@@ -14,15 +14,15 @@ export class DetailsComponent {
   presentingElement : undefined | null | Element;
   url =
   'https://loginprova-ff37d-default-rtdb.europe-west1.firebasedatabase.app/users';
-  user: any;
   userId! : string 
-
+  user : any
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _service: FirebaseService,
     private actionSheetCtrl: ActionSheetController,
     private formBuilder: FormBuilder
-  ) {
+    ) {
+   
      this._activatedRoute.params.subscribe((data) => this.userId = data['id'])
   }
   
@@ -30,17 +30,26 @@ export class DetailsComponent {
     this.presentingElement = document.querySelector('.ion-page');
     
   }
-
-  ionViewWillEnter() {
-
-      this._service
-        .getUserById(this.url, this.userId)
-        .subscribe((user) => (this.user = user));
-    };
   
+  ionViewWillEnter() {
+    
+    this._service
+    .getUserById(this.url, this.userId)
+    .subscribe((user) => {
+      this.user = user
 
-  editUserForm = this.formBuilder.group({
-    name : [``],
+      // Passare dati di default dell'utente nella compilazione del form
+      this.editUserForm.patchValue({
+        name: this.user.name,
+        email: this.user.email,
+        gender: this.user.gender,
+      });
+    });
+  };
+  
+  
+   editUserForm = this.formBuilder.group({
+    name : [],
     email : ['', Validators.required],
     gender : ['']
   })

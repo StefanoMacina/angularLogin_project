@@ -6,28 +6,31 @@
 
 <ion-content [fullscreen]="true">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <div>
+    <ion-item>
       <ion-input
         formControlName="name"
         label="name"
         labelPlacement="floating"
         placeholder="Enter name"
       ></ion-input>
-    </div>
-    <div>
+    </ion-item>
+    <ion-item>
       <ion-input
         formControlName="email"
         label="email"
         labelPlacement="floating"
         placeholder="Enter email"
       ></ion-input>
-    </div>
-    <ion-select formControlName="gender" interface="popover" placeholder="select gender" >
-      <ion-select-option value="male">male</ion-select-option>
-      <ion-select-option value="female">female</ion-select-option>
-      <ion-select-option value="notSpecified">not specified</ion-select-option>
-    </ion-select>
-    <ion-button type="submit" color="success" [disabled]="!profileForm.valid"
+    </ion-item>
+    <ion-item>
+
+      <ion-select formControlName="gender" interface="popover" placeholder="select gender" >
+        <ion-select-option value="male">male</ion-select-option>
+        <ion-select-option value="female">female</ion-select-option>
+        <ion-select-option value="notSpecified">not specified</ion-select-option>
+      </ion-select>
+    </ion-item>
+      <ion-button type="submit" color="success" [disabled]="!profileForm.valid"
       >Submit</ion-button
     >
   </form>
