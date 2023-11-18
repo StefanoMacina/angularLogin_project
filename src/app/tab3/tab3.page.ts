@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { UserModel } from '../models/user.model';
@@ -8,12 +8,12 @@ import { UserModel } from '../models/user.model';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
   user: UserModel | null | undefined;
 
   constructor(private _authService: AuthService, private _router : Router, private _activRoute : ActivatedRoute) {}
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.user = this._authService.user;
   }
 

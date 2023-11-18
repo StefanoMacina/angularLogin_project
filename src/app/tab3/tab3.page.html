@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
   
-  <ng-template *ngIf="user ; else ifNotUser">
+  <ng-template *ngIf="!user ; else ifNotUser">
     <ion-button color="success" (click)="goToSignUp()">SIGNUP</ion-button>
     <ion-button color="primary" (click)="goToLogin()">LOGIN</ion-button>
   </ng-template>

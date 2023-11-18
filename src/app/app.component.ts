@@ -15,6 +15,8 @@ export class AppComponent {
     if (userString) {
       const { email, id, _token, _expirationDate } = JSON.parse(userString);
       this._authService.createUser(email, id, _token, _expirationDate);
+    } else {
+      return 
     }
   }
 }
